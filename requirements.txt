@@ -1,4 +1,4 @@
 streamlit>=0.69.2
-BeautifulSoup==3.2.0
+BeautifulSoup>=3.2.0
 matplotlib
 json
