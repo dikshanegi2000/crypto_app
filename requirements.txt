@@ -1,8 +1,2 @@
-matplotlib
-seaborn
-bs4
-requests
-json
-time
 streamlit
-python3
+python>=3.6
