@@ -3,7 +3,6 @@ import pandas as pd
 from PIL import Image
 import base64
 import matplotlib.pyplot as plt 
-import seaborn as sns
 from bs4 import BeautifulSoup
 import requests
 import json
