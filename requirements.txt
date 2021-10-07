@@ -2,3 +2,4 @@ streamlit>=0.69.2
 matplotlib
 bs4==0.0.1
 cryptocmd
+plotly
