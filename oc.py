@@ -50,7 +50,7 @@ col1.header('Input options')
 currency_price_unit = col1.selectbox('Select currency for price',('USD','BTC','ETH'))
 
 
-#@st.cache(hash_funcs={json.load: None})
+@st.cache(hash_funcs={json.load: None})
 def load_data():
     cmc=requests.get('https://coinmarketcap.com')
     soup=BeautifulSoup(cmc.content,'html.parser')
