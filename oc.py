@@ -22,16 +22,16 @@ image = Image.open('logo.jpg')
 st.container()
 # st.columns(spec)
 col1, col2 = st.columns(2)
-col1.image(image,width=500)
+col2.image(image,width=500)
 
 
 # title----------------------------------------
-col2.title('IDK crypto App')
-col2.markdown(""" 
+col1.title('IDK crypto App')
+col1.markdown(""" 
 This app retrieves top 100 Cryptocurrencies """)
 
 #about------------------------------------------
-expander_bar  = col2.expander("About")
+expander_bar  = col1.expander("About")
 
 expander_bar.markdown("""
 IDK crypto app retrives the latest info about the cryptocurrencies so now u know what's treanding in cryptocurrencies 
