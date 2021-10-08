@@ -190,109 +190,146 @@ else:
     col3.pyplot(plt)
 
 col2.subheader('Cryptocurrency Dashboard')
-tickers = [
-"AAVE","ADA","ALGO","AMP","AR","ATOM","AVAX","AXS","BAT","BCH","BNB","BSV","BTC","BTCB","BTG","BTT","BUSD","CAKE","CEL","CELO","CHZ","COMP","CRO","CRV","DAI","DASH","DCR","DOGE","DOT","DYDX","EGLD","ENJ","EOS","ETC","ETH","FIL","FLOW",
-"FTM"
-,"FTT"
-,"GRT"
-,"HBAR"
-,"HNT"
-,"HOT"
-,"HT"
-,"ICP"
-,"ICX"
-,"IOST"
-,"KLAY"
-,"KSM"
-,"LEO"
-,"LINK"
-,"LTC"
-,"LUNA"
-,"MANA"
-,"MATIC"
-,"MINA"
-,"MIOTA"
-,"MKR"
-,"NEAR"
-,"NEO"
-,"NEXO"
-,"OKB"
-,"OMG"
-,"ONE"
-,"QNT"
-,"QTUM"
-,"REN"
-,"RENBTC"
-,"REV"
-,"RUNE"
-,"RVN"
-,"SHIB"
-,"SNX"
-,"SOL"
-,"SRM"
-,"STX"
-,"SUSHI"
-,"TEL"
-,"TFUEL"
-,"THETA"
-,"TRX"
-,"TUSD"
-,"UNI"
-,"USDC"
-,"USDP"
-,"USDT"
-,"UST"
-,"VET"
-,"WAVES"
-,"WBTC"
-,"XDC"
-,"XEC"
-,"XEM"
-,"XLM"
-,"XMR"
-,"XRP"
-,"XTZ"
-,"YFI"
-,"ZEC"
-,"ZIL"]
+# tickers = [
+# "AAVE","ADA","ALGO","AMP","AR","ATOM","AVAX","AXS","BAT","BCH","BNB","BSV","BTC","BTCB","BTG","BTT","BUSD","CAKE","CEL","CELO","CHZ","COMP","CRO","CRV","DAI","DASH","DCR","DOGE","DOT","DYDX","EGLD","ENJ","EOS","ETC","ETH","FIL","FLOW",
+# "FTM"
+# ,"FTT"
+# ,"GRT"
+# ,"HBAR"
+# ,"HNT"
+# ,"HOT"
+# ,"HT"
+# ,"ICP"
+# ,"ICX"
+# ,"IOST"
+# ,"KLAY"
+# ,"KSM"
+# ,"LEO"
+# ,"LINK"
+# ,"LTC"
+# ,"LUNA"
+# ,"MANA"
+# ,"MATIC"
+# ,"MINA"
+# ,"MIOTA"
+# ,"MKR"
+# ,"NEAR"
+# ,"NEO"
+# ,"NEXO"
+# ,"OKB"
+# ,"OMG"
+# ,"ONE"
+# ,"QNT"
+# ,"QTUM"
+# ,"REN"
+# ,"RENBTC"
+# ,"REV"
+# ,"RUNE"
+# ,"RVN"
+# ,"SHIB"
+# ,"SNX"
+# ,"SOL"
+# ,"SRM"
+# ,"STX"
+# ,"SUSHI"
+# ,"TEL"
+# ,"TFUEL"
+# ,"THETA"
+# ,"TRX"
+# ,"TUSD"
+# ,"UNI"
+# ,"USDC"
+# ,"USDP"
+# ,"USDT"
+# ,"UST"
+# ,"VET"
+# ,"WAVES"
+# ,"WBTC"
+# ,"XDC"
+# ,"XEC"
+# ,"XEM"
+# ,"XLM"
+# ,"XMR"
+# ,"XRP"
+# ,"XTZ"
+# ,"YFI"
+# ,"ZEC"
+# ,"ZIL"]
 
 
-dropdown = col2.selectbox('Select Your Cryptocurrency', tickers)
+# dropdown = col2.selectbox('Select Your Cryptocurrency', tickers)
 
 
 
+
+# from cryptocmd import CmcScraper
+
+# # initialise scraper without time interval
+# scraper = CmcScraper(dropdown)
+
+# # get raw data as list of list
+# headers, data = scraper.get_data()
+
+# # get data in a json format
+# xrp_json_data = scraper.get_data("json")
+
+# # export the data as csv file, you can also pass optional `name` parameter
+# scraper.export("csv")
+
+# # Pandas dataFrame for the same data
+# df = scraper.get_dataframe()
+
+# import plotly.graph_objects as go
+
+# fig = go.Figure()
+
+# fig.add_trace(go.Scatter(x = df.Date, y = df.Volume,
+#                                  mode = 'lines',
+#                                  name = 'yooyo'))
+
+# col2.plotly_chart(fig, use_container_width=False)
+
+# # if len(dropdown) >0:
+#     # df  = yf.download(dropdown,start,end)['Adj Close']
+ 
+    
+#     # col2.line_chart(df['Volume'])
+
+
+dropdown = col2.multiselect('Select Your Cryptocurrency', sorted_coin)
+
+start = col2.date_input('Start',value = pd.to_datetime('2021-01-01')).strftime("%d-%m-%Y")
+end = col2.date_input('End',value = pd.to_datetime('today')).strftime("%d-%m-%Y")
 
 from cryptocmd import CmcScraper
 
-# initialise scraper without time interval
-scraper = CmcScraper(dropdown)
+f_df = pd.DataFrame(columns=dropdown)
+for options in dropdown:
 
-# get raw data as list of list
-headers, data = scraper.get_data()
 
-# get data in a json format
-xrp_json_data = scraper.get_data("json")
+    # initialise scraper with time interval
+    scraper = CmcScraper(options, start, end)
 
-# export the data as csv file, you can also pass optional `name` parameter
-scraper.export("csv")
+    # get raw data as list of list
+    headers, data = scraper.get_data()
 
-# Pandas dataFrame for the same data
-df = scraper.get_dataframe()
+    # get data in a json format
+    json_data = scraper.get_data("json")
 
-import plotly.graph_objects as go
+    # export the data to csv
+    scraper.export("csv")
 
-fig = go.Figure()
+    # get dataframe for the data
+    df = scraper.get_dataframe()
 
-fig.add_trace(go.Scatter(x = df.Date, y = df.Volume,
-                                 mode = 'lines',
-                                 name = 'yooyo'))
+    f_df[options] = df['Market Cap']
 
-col2.plotly_chart(fig, use_container_width=False)
+if(f_df.empty):
+      col2.write('Invalid Date')
 
-# if len(dropdown) >0:
-    # df  = yf.download(dropdown,start,end)['Adj Close']
- 
-    
-    # col2.line_chart(df['Volume'])
-
+elif len(dropdown) > 0:
+    f_df = f_df.set_index(df['Date'])
+    #print(df) 
+    #f_df = f_df.pct_change()
+    col2.line_chart(f_df)
 
