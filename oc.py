@@ -23,7 +23,7 @@ st.image(image,width=500)
 
 
 # title----------------------------------------
-st.title('Crypto-Price App')
+st.title('IDK crypto App')
 st.markdown(""" 
 This app retrieves top 100 Cryptocurrencies """)
 
@@ -31,6 +31,7 @@ This app retrieves top 100 Cryptocurrencies """)
 expander_bar  = st.expander("About")
 
 expander_bar.markdown("""
+IDK crypto app retrives the latest info about the cryptocurriencies so now u know what's treanding in crypto currencies 
 * **Python libraries:** base64, pandas, streamlit, numpy, matplotlib, seaborn, BeautifulSoup, requests, json, time
 * **Data source:** [CoinMarketCap](http://coinmarketcap.com).
 * **Credit:** Web scraper adapted from the Medium article *[Web Scraping Crypto Prices With Python](https://towardsdatascience.com/web-scraping-crypto-prices-with-python-41072ea5b5bf)* written by [Bryan Feng](https://medium.com/@bryanf).
