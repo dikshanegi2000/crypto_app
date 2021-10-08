@@ -32,9 +32,9 @@ IDK crypto app retrives the latest info about the top 100 cryptocurrencies so no
 """)
 
 #about------------------------------------------
-expander_bar  = col1.expander("About")
+# expander_bar  = col1.expander("About")
 
-expander_bar.markdown("""
+col1.markdown("""
 * **Python libraries:** base64, pandas, streamlit, numpy, matplotlib, seaborn, BeautifulSoup, requests, json, time
 * **Data source:** [CoinMarketCap](http://coinmarketcap.com).
 * **Credit:** Web scraper adapted from the Medium article *[Web Scraping Crypto Prices With Python](https://towardsdatascience.com/web-scraping-crypto-prices-with-python-41072ea5b5bf)* written by [Bryan Feng](https://medium.com/@bryanf).
