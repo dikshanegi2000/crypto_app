@@ -20,7 +20,7 @@ st.set_page_config(layout = "wide")
 image = Image.open('logo.jpg')
 
 st.container()
-st.columns(spec)
+# st.columns(spec)
 col1, col2 = st.columns(2)
 col1.image(image,width=500)
 
